@@ -1,4 +1,4 @@
-# Sports API
+# Sports API Backend
 
 This API will allow the users of our react front-end application to CRUD sports and their teams.
 
