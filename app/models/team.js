@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 // eventually each team will have a players array
 // will use virtuals to produce additional data on each team
 
-const TeamSchema = new mongoose.Schema(
+const teamSchema = new mongoose.Schema(
 	{
 		name: {
 			type: String,
@@ -31,10 +31,13 @@ const TeamSchema = new mongoose.Schema(
 		timestamps: true,
 		// include virtuals
 		toObject: { virtuals: true },
-		toJSON: {virtuals: true }
+		toJSON: { virtuals: true }
 	}
 )
 
 // virtuals go here
+teamSchema.virtual('fullTitle').get(function () {
+	return `The ${this.name} are a ${this.type} team`
+})
 
-module.exports = mongoose.model('Team', TeamSchema)
+module.exports = mongoose.model('Team', teamSchema)
