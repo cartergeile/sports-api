@@ -41,7 +41,7 @@ router.patch('/players/:teamId/:playerId', requireToken, removeBlanks, (req, res
     .then(handle404)
     .then(team => {
       const thePlayer = team.players.id(playerId)
-      //requireOwnership(req, team)
+      requireOwnership(req, team)
       thePlayer.set(req.body.player)
 
       return team.save()
@@ -58,15 +58,15 @@ router.delete('/players/:teamId/:playerId', requireToken, removeBlanks, (req, re
   const playerId = req.params.playerId
 
   Team.findById(teamId)
-  .then(handle404)
-  .then(team => {
-    const thePlayer = team.players.id(playerId)
-    //requireOwnership(req, team)
-    thePlayer.remove()
-    return team.save()   
-  })
-  .then(() => res.sendStatus(204))
-  .catch(next)
+    .then(handle404)
+    .then(team => {
+      const thePlayer = team.players.id(playerId)
+      requireOwnership(req, team)
+      thePlayer.remove()
+      return team.save()   
+    })
+    .then(() => res.sendStatus(204))
+    .catch(next)
 })
 
 
