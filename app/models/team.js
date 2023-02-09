@@ -25,14 +25,13 @@ const TeamSchema = new mongoose.Schema(
 		owner: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',
-			required: true,
-			// include virtuals
-			toObject: { virtuals: true },
-			toJSON: {virtuals: true }
 		},
 	},
 	{
 		timestamps: true,
+		// include virtuals
+		toObject: { virtuals: true },
+		toJSON: {virtuals: true }
 	}
 )
 
