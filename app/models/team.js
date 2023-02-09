@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+const playerSchema = require('./player')
+
 // TEAM -> has a name, type, rank, canJoin(boolean)
 // eventually each team will have a players array
 // will use virtuals to produce additional data on each team
@@ -22,6 +24,7 @@ const teamSchema = new mongoose.Schema(
 			type: Boolean,
 			required: true
 		},
+		players: [playerSchema],
 		owner: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',
